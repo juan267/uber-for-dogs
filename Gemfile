@@ -12,6 +12,7 @@ gem 'thin'
 
 gem 'activesupport', '~>4.1'
 gem 'activerecord', '~>4.1'
+gem 'validates_email_format_of'
 
 gem 'rake'
 gem 'bcrypt-ruby'
