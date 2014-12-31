@@ -12,10 +12,20 @@
   <body>
 
     <nav>
-    <ul>
-      <li><a href="#">Sign in</a></li>
-      <li><a href="#">Sign up</a></li>
-    </ul>
+    <% if current_owner %>
+      <ul>
+        <li><a id="sign-out" href="/sessions/<%= current_owner.id %>">Log out</a></li>
+<!--         <form id="sign-out" action="/sessions/<%= current_owner.id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="Log out">
+        </form> -->
+      </ul>
+    <% else %>
+      <ul>
+        <li><a href="/sessions/new">Sign in</a></li>
+        <li><a href="/owners/new">Sign up</a></li>
+      </ul>
+    <% end %>
     </nav>
 
     <div class="container">

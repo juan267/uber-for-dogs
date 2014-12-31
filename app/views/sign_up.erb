@@ -1,0 +1,16 @@
+
+
+<form id="owner_sign_up" action="/owners" method="post">
+  <label for="owner[first_name]">First name:</label>
+  <input type="text" name="owner[first_name]" required="required">
+  <label for="owner[last_name]">Last name:</label>
+  <input type="text" name="owner[last_name]" required="required">
+  <label for="owner[email]">Email:</label>
+<!--   <% if @errors %>
+    <h3 style="color:red"><%= @errors %></h3>
+  <% end %> -->
+  <input id="email" type="email" name="owner[email]" required="required">
+  <label for="owner[password_hash]">Password:</label>
+  <input type="password" name="owner[password_hash]" required="required">
+  <input type="submit" value="Sign up">
+</form>

@@ -8,6 +8,7 @@ class CreateWalks < ActiveRecord::Migration
       t.string :notes
       t.belongs_to :dog
       t.belongs_to :walker
+      t.timestamps
     end
   end
 end

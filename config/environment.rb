@@ -14,7 +14,8 @@ require 'pathname'
 require 'pg'
 require 'active_record'
 require 'logger'
-
+require 'validates_email_format_of'
+require 'date'
 require 'sinatra'
 
 require 'erb'

@@ -1,0 +1,11 @@
+<% if @error %>
+  <div class="errors"><%= @error %></div>
+<% end %>
+
+<form action="/sessions" method="post">
+  <label for="email">Email Address</label>
+  <input type="email" name="email" placeholder="Enter email">
+  <label for="password">Password</label>
+  <input type="password" name="password" placeholder="Enter password">
+  <input type="submit" value="Sign in">
+</form>
