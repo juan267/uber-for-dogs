@@ -15,4 +15,5 @@ class Owner < ActiveRecord::Base
     end
   end
 
+
 end

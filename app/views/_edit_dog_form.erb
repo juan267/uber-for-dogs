@@ -1,0 +1,10 @@
+<form id="edit-dog-form" action="/owners/<%= @owner.id %>/dogs/<%= @dog.id %>" method="post">
+  <input type="hidden" name="_method" value="PUT">
+  <label for="dog[name]">Name</label>
+  <input type="text" name="dog[name]" value="<%= @dog.name %>">
+  <label for="dog[breed]">Breed</label>
+  <input type="text" name="dog[breed]" value="<%= @dog.breed %>">
+  <label for="dog[birthday]">Birthday</label>
+  <input type="date" name="dog[birthday]" value="<%= @dog.birthday %>">
+  <input type="submit" value="Update <%= @dog.name %> info">
+</form>

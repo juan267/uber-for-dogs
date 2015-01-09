@@ -1,0 +1,16 @@
+<h3>Hi new walker, please sign up</h3>
+
+<form id="owner_sign_up" action="/walkers" method="post">
+  <label for="walker[first_name]">First name:</label>
+  <input type="text" name="walker[first_name]" required="required">
+  <label for="walker[last_name]">Last name:</label>
+  <input type="text" name="walker[last_name]" required="required">
+  <label for="walker[email]">Email:</label>
+<!--   <% if @errors %>
+    <h3 style="color:red"><%= @errors %></h3>
+  <% end %> -->
+  <input id="email" type="email" name="walker[email]" required="required">
+  <label for="walker[password_hash]">Password:</label>
+  <input type="password" name="walker[password_hash]" required="required">
+  <input type="submit" value="Sign up">
+</form>

@@ -1,0 +1,15 @@
+<div id="map-canvas">
+
+</div>
+
+<h3>Coordinates</h3>
+<p>Longitude: <span id="lng"></span></p>
+<p>Latitude: <span id="lat"></span></p>
+<p>Distance: <span id="dis"></span></p>
+
+
+<button id="map">Create map</button>
+<a id="line" href="/coords">Draw line</a>
+<a id="startTracking" href="/owners/<%= current_owner.id %>/dogs/coords/new">Start</a>
+<a id="stopTracking" href="#">Stop</a>
+<p id="message"></p>

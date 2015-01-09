@@ -4,6 +4,14 @@ class Walker < ActiveRecord::Base
   validates :email, uniqueness: true
   validates_email_format_of :email, :message => 'Invalid email'
 
+  def total_distance
+    total_distance = 0
+    self.walks.each do |walk|
+      total_distance += walk.distance
+    end
+    total_distance
+  end
+
   def password=(plaintext)
     self.password_hash = BCrypt::Password.create(plaintext)
   end

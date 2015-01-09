@@ -1,0 +1,23 @@
+<h1>My Pawsome dog family</h1>
+<% if @dogs.empty? %>
+  <h3 id="dog-title">You dont have any dogs yet add one:</h3>
+  <ul id="dogs">
+  </ul>
+  <a id="add_dog" href="/owners/<%= @owner.id %>/dogs/new">Add a new Dog</a>
+  <div id="form-container">
+  </div>
+<% else %>
+  <h3>Your Dogs</h3>
+  <ul id="dogs">
+    <% @dogs.each do |dog| %>
+      <li>
+        <a href="/owners/<%= current_owner.id %>/dogs/<%= dog.id %>"><%= dog.name %></a>
+        <a id="edit" href="/owners/<%= current_owner.id %>/dogs/<%= dog.id %>/edit">Edit</a>
+      </li>
+  <% end %>
+  </ul>
+  <a id="add_dog" href="/owners/<%= @owner.id %>/dogs/new">Add a new Dog</a>
+  <div id="form-container">
+
+  </div>
+<% end %>

@@ -9,4 +9,13 @@ helpers do
     end
   end
 
+  def current_walker
+    if session[:walker_id]
+      @current_walker = Walker.find(session[:walker_id])
+      return @current_walker
+    else
+      nil
+    end
+  end
+
 end

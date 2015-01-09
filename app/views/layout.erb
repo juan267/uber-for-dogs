@@ -5,20 +5,19 @@
     <link rel="stylesheet" href="/css/application.css">
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script src="/js/gmaps.js"></script>
+    <script src="/js/map.js"></script>
     <script src="/js/application.js"></script>
 
     <title></title>
   </head>
   <body>
 
-    <nav>
-    <% if current_owner %>
+    <nav >
+    <% if current_owner || current_walker %>
       <ul>
-        <li><a id="sign-out" href="/sessions/<%= current_owner.id %>">Log out</a></li>
-<!--         <form id="sign-out" action="/sessions/<%= current_owner.id %>" method="post">
-          <input type="hidden" name="_method" value="delete">
-          <input type="submit" value="Log out">
-        </form> -->
+        <li><a id="sign-out" href="/sessions/delete">Log out</a></li>
       </ul>
     <% else %>
       <ul>
@@ -27,9 +26,21 @@
       </ul>
     <% end %>
     </nav>
-
+    <% if current_owner %>
+    <div id="left_nav">
+      <ul >
+        <li><a href="/owners/<%= current_owner.id %>">My Profile</a></li>
+        <li><a href="/owners/<%= current_owner.id %>/dogs">My Dogs</a></li>
+        <li><a href="/owners">Schedule</a></li>
+        <li><a href="/owners/<%= current_owner.id %>/map">map</a></li>
+      </ul>
+    </div>
+    <% end %>
     <div class="container">
       <%= yield %>
     </div>
   </body>
 </html>
+
+
+

@@ -1,0 +1,9 @@
+<form id="new-dog-form" action="/owners/<%= @owner.id %>/dogs" method="post">
+  <label for="dog[name]">Name</label>
+  <input type="text" name="dog[name]" placeholder="name">
+  <label for="dog[breed]">Breed</label>
+  <input type="text" name="dog[breed]" placeholder="Breed">
+  <label for="dog[birthday]">Birthday</label>
+  <input type="date" name="dog[birthday]" placeholder="Birthday">
+  <input type="submit" value="Add dog">
+</form>
