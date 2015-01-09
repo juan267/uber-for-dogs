@@ -95,6 +95,14 @@ get '/owners/:id/dogs/:dog_id' do
   erb :dog_profile
 end
 
+post '/owners/:owner_id/dogs/:dog_id/walks' do
+  @dog = Dog.find(params[:dog_id])
+  walk = @dog.walks.create()
+  coord = Coord.create(latitude:params[:lat], longitude:params[:lng], walk_id: walk.id)
+  content_type :json
+  {walk_id: walk.id}.to_json
+end
+
 put '/owners/:id/dogs/:dog_id' do
   @dog = Dog.find(params[:dog_id])
   @dog.update(params[:dog])
@@ -115,8 +123,8 @@ get '/coords' do
   {path: @path}.to_json
 end
 
-post '/owners/:id/dogs/coords/new' do
-  walk = Walk.find(1)
+post '/owners/:id/dogs/:id/walk/:walk_id/coords/new' do
+  walk = Walk.find(params[:walk_id])
   last_coord = walk.path[-1]
   coord = Coord.create(latitude:params[:lat], longitude:params[:lng], walk_id: walk.id)
   distance = walk.distance
