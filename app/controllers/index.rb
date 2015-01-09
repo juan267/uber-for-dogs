@@ -91,16 +91,26 @@ end
 get '/owners/:id/dogs/:dog_id' do
   @dog = Dog.find(params[:dog_id])
   @walkers = @dog.walkers
-  @walks = @dog.walks
+  @walk = @dog.walks.last
   erb :dog_profile
 end
 
 post '/owners/:owner_id/dogs/:dog_id/walks' do
   @dog = Dog.find(params[:dog_id])
-  walk = @dog.walks.create()
-  coord = Coord.create(latitude:params[:lat], longitude:params[:lng], walk_id: walk.id)
+  p params
+  @walk = @dog.walks.create(walker_id: 1, pick_up_time:params[:pick_up_time]) #hard coded
+  @walker = Walker.find(1) #hard coded
+  coord = Coord.create(latitude:params[:lat], longitude:params[:lng], walk_id: @walk.id)
+  erb :_first_walk, layout: false
+end
+
+get '/owners/:owner_id/dogs/:dog_id/walks/active' do
+  @dog = Dog.find(params[:dog_id])
+  @walk = @dog.walks.where(status:"active").take
+  distance = @walk.distance
+  path = [@walk.path[-2], @walk.path[-1]]
   content_type :json
-  {walk_id: walk.id}.to_json
+  {path: path, distance: distance, }.to_json
 end
 
 put '/owners/:id/dogs/:dog_id' do
@@ -112,7 +122,10 @@ end
 
 #-----------MAP--------------------
 
-get '/owners/:id/map' do
+get '/walkers/:walker_id/dogs/:dog_id/walks/:walk_id/map' do
+  @walker = current_walker
+  @walk = Walk.find(params[:walk_id])
+  @dog = Dog.find(params[:dog_id])
   erb :map
 end
 
@@ -123,8 +136,10 @@ get '/coords' do
   {path: @path}.to_json
 end
 
-post '/owners/:id/dogs/:id/walk/:walk_id/coords/new' do
+post '/walkers/:id/dogs/:id/walk/:walk_id/coords/new' do
   walk = Walk.find(params[:walk_id])
+  walk.status = "active"
+  walk.save
   last_coord = walk.path[-1]
   coord = Coord.create(latitude:params[:lat], longitude:params[:lng], walk_id: walk.id)
   distance = walk.distance

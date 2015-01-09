@@ -1,18 +1,21 @@
 $(document).ready(function () {
 
   // send an HTTP DELETE request for the sign-out link
-  $('#new-walk').on("click", function(e){
+  $('#new-walk').on("submit", function(e){
     e.preventDefault();
-    var url = $(this).attr('href')
+    var url = $(this).attr('action')
+    var data = $(this).serialize()
 
     navigator.geolocation.getCurrentPosition(function(position){
 
       $.ajax({
         type: 'post',
-        url: url+'?lat='+position.coords.latitude+'&lng='+position.coords.longitude
+        url: url+'?lat='+position.coords.latitude+'&lng='+position.coords.longitude,
+        data: data
           }).done(function(response){
         console.log(response)
-        $("#walks").append('<li>'+response.walk_id+'</li> ')
+        $("#no-walk-container").empty();
+        $("#no-walk-container").append(response);
         })
     })
 

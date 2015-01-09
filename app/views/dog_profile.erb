@@ -10,22 +10,45 @@
           <div class="sep"></div>
           <ul class="numbers clearfix">
             <li>Distance Walk<strong><%= @dog.total_distance %></strong></li>
-            <li>Calories Burn<strong>344</strong></li>
-            <li class="nobrdr">Poop<strong>127</strong></li>
+            <li>Calories Burn<strong>0</strong></li>
+            <li class="nobrdr">Poop<strong>0</strong></li>
           </ul>
         </div>
       <a id="line" href="/coords">Draw line</a>
       </div>
-      <a id="new-walk" href="/owners/<%= current_owner.id %>/dogs/<%= @dog.id %>/walks">New walk</a>
+      <% if @dog.walks.empty? %>
+        <div id="no-walk-container">
+          <h1>Schedule <%= @dog.name %> first walk!</h1>
+          <form id ="new-walk"action="/owners/<%= current_owner.id %>/dogs/<%= @dog.id %>/walks" method="post">
+            <label for="pick_up_time">Pick up time</label>
+            <input type="datetime-local" name="pick_up_time"><br>
+            <label for="time">Duration</label><br>
+            <input type="radio" name="time" value="30" checked> 30 minutes<br>
+            <input type="radio" name="time" value="60"> 60 minutes <br>
+            <input type="submit" value="Schedule walk">
+          </form>
+        </div>
+        <!--<a id="new-walk" href="/owners/<%= current_owner.id %>/dogs/<%= @dog.id %>/walks">New walk</a> -->
+      <% elsif @walk.status = "active" %>
+        <h1 id="dog-last-walk">Current walk:</h1>
+        <a id ="dog-last-walk-path" href="/owners/<%= current_owner.id %>/dogs/<%= @dog.id %>/walks/active"></a>
+        <div id="map-canvas">
 
-      <h1>My last walk:</h1>
-      <div id="map-canvas">
+        </div>
+        <ul id="walks">
 
-      </div>
+        </ul>
 
-      <ul id="walks">
+      <% else %>
+        <h1 id="dog-last-walk">My last walk:</h1>
+        <div id="map-canvas">
 
-      </ul>
+        </div>
+        <ul id="walks">
+
+        </ul>
+      <% end %>
+
 
     </section>
 

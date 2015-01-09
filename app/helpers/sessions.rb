@@ -17,5 +17,4 @@ helpers do
       nil
     end
   end
-
 end

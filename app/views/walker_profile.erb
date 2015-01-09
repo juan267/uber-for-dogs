@@ -16,14 +16,18 @@
       <a id="line" href="/coords">Draw line</a>
       </div>
 
-      <% if current_owner %>
-      <h3>Next available slots:</h3>
-      <form action=""></for
-      <% end %>
-      <h1>My last walk:</h1>
-      <div id="map-canvas">
-
-      </div>
+      <h1>Next walks</h1>
+      <ul>
+        <% @walker.walks.each do |walk| %>
+          <ul>
+            <li><%= walk.dog.name %></li>
+            <li><%= walk.pick_up_time %></li>
+            <% if current_walker %>
+              <li><a href="/walkers/<%= current_walker.id %>/dogs/<%= walk.dog.id %>/walks/<%= walk.id %>/map">Start walk</a></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </ul>
 
     </section>
 

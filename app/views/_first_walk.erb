@@ -1,0 +1,13 @@
+<h1>Yay <%= @dog.name.capitalize %> first walk </h1>
+<ul>
+  <li>when:
+    <ul>
+      <li><%= @walk.pick_up_time %></li>
+    </ul>
+  </li>
+  <li>Who:
+    <ul>
+      <li><a href="/walkers/<%= @walker.id %>"><%= @walker.first_name %></a></li>
+    </ul>
+  </li>
+</ul>

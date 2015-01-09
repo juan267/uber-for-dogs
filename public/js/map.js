@@ -1,7 +1,25 @@
 $(document).ready(function(){
   bindEvents();
   getLocation();
+  decideMap();
 })
+
+var decideMap = function() {
+  if($("#dog-last-walk").text() === "Current walk:") {
+    url = $("#dog-last-walk-path").attr("href")
+    walk = setInterval(function(){
+
+      $.ajax({
+        type: 'get',
+        url: url
+      }).done(function(response){
+        console.log(response.path)
+        drawLine(response.path)
+        moveMarker(marker, response.path[1][0], response.path[1][1])
+      })
+    }, 5000)
+  }
+}
 
 var startTracking = function(that) {
 
@@ -14,6 +32,7 @@ var startTracking = function(that) {
           type: 'post',
           url: url+'?lat='+position.coords.latitude+'&lng='+position.coords.longitude
         }).done(function(response){
+          console.log(response.path)
           drawLine(response.path)
           distance(response.distance)
           moveMarker(marker, response.path[1][0], response.path[1][1])
@@ -35,6 +54,8 @@ var startTracking = function(that) {
 }
 
 var stopTracking = function() {
+
+  var url = $()
   clearInterval(walk);
 }
 
