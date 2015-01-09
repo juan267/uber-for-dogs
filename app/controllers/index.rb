@@ -143,6 +143,7 @@ post '/walkers/:id/dogs/:id/walk/:walk_id/coords/new' do
   last_coord = walk.path[-1]
   coord = Coord.create(latitude:params[:lat], longitude:params[:lng], walk_id: walk.id)
   distance = walk.distance
+  walk.status = "active"
   walk.save
   content_type :json
   path = [last_coord, [coord.latitude, coord.longitude]]
